@@ -8,5 +8,3 @@ plotly
 jupyter
 seaborn
 statsmodels
-time
-
