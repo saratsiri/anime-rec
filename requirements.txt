@@ -1,0 +1,7 @@
+numpy
+surprise
+pandas
+scipy
+matplotlib
+sklearn
+plotly
