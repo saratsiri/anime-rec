@@ -7,3 +7,6 @@ scikit-learn
 plotly
 jupyter
 seaborn
+statsmodels
+time
+
