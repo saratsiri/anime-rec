@@ -3,7 +3,7 @@ surprise
 pandas
 scipy
 matplotlib
-sklearn
+scikit-learn
 plotly
 jupyter
 seaborn
