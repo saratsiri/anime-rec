@@ -1,6 +1,7 @@
 # Dont' wanna push big csv files
 .csv
 raw_data/
+processed_data/
 .python-version
 # Byte-compiled / optimized / DLL files
 __pycache__/
