@@ -3,6 +3,7 @@
 raw_data/
 processed_data/
 .python-version
+.DS_Store
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
