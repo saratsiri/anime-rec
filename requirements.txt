@@ -1,5 +1,4 @@
 numpy
-surprise
 pandas
 scipy
 matplotlib
@@ -8,3 +7,6 @@ plotly
 jupyter
 seaborn
 statsmodels
+scikit-surprise
+collection
+time
