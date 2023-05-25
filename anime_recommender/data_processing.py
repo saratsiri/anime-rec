@@ -15,9 +15,7 @@ upper_rating = ScoresDF['my_score'].max()
 
 #Counting how many relevant scores each user have done, resetting the index (so the series could become a DF again) and changing the column names
 UsersAndScores = ScoresDF['username'].value_counts().reset_index().rename(columns={"username": "animes_rated", "index": "username"})
-
 UsersSampled = UsersDF.sample(frac = 1) #, random_state = 2)
-
 UsersAndScoresSampled = pd.merge(UsersAndScores, UsersSampled, left_on = 'username', right_on = 'username', how = 'inner')
 
 #Grouping users whom had the same amount of animes rated

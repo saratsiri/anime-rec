@@ -5,10 +5,10 @@ import surprise as sp
 import pickle
 import os
 
-print("Loading data...\n")
+print("Loading data...")
 # Load preprocessed data
-ScoresDFHotStart = pd.read_csv('../processed_data/ScoresDFHotStart.csv')
-print("Loading data completed\n")
+ScoresDFHotStart = pd.read_csv(f'{os.getcwd()}/processed_data/ScoresDFHotStart.csv')
+print("Loading data completed")
 # Initialize reader and load data into Surprise dataset format
 reader = sp.Reader(rating_scale=(0, 10))
 data = sp.Dataset.load_from_df(ScoresDFHotStart[['username', 'anime_id', 'my_score']], reader)
@@ -26,24 +26,24 @@ baseline_model.fit(trainset_full)
 
 # Generate anti-testset and make predictions
 anti_testset = trainset_full.build_anti_testset()
-print("Training Baseline Model...\n")
+print("Training Baseline Model...")
 predictions = baseline_model.test(anti_testset)
-print("Baseline Model Completed\n")
+print("Baseline Model Completed")
 
 # Convert predictions to dataframe and drop unnecessary column
 predictions_df = pd.DataFrame(predictions, columns=['uid', 'iid', 'rui', 'est', 'details'])
 predictions_df.drop('rui', axis=1, inplace=True)
 
 # Train a KNNBaseline model
-print("Training KNN model\n")
+print("Training KNN model")
 sim_options = {'name': 'pearson_baseline', 'user_based': False}
 knn_model = sp.KNNBaseline(sim_options=sim_options)
 knn_model.fit(trainset_full)
 print("KNN Model Completed")
 # Save models to pickle files
-print("Saving..\n")
+print("Saving..")
 with open(f"{os.getcwd()}/trained_models/baseline_model.pickle", 'wb') as f:
     pickle.dump(baseline_model, f)
 with open(f"{os.getcwd()}/trained_models/knn_model.pickle", 'wb') as f:
     pickle.dump(knn_model, f)
-print("Saving Completed\n")
+print("Saving Completed")
