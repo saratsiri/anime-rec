@@ -1,6 +1,6 @@
 import pandas as pd #required pandas == 1.4.4
 import os
-
+print("Hello")
 #Importing the CSVs to Dataframe format
 UsersDF = pd.read_csv(f'{os.getcwd()}/raw_data/users_cleaned.csv')
 AnimesDF = pd.read_csv(f'{os.getcwd()}/raw_data/anime_cleaned.csv')
