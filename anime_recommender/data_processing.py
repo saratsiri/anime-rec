@@ -42,3 +42,6 @@ AnimeRatedsCutten = RatedsPerAnime[RatedsPerAnime['number_of_users'] >= 10]
 # Merge to create final dataset of users and animes with sufficient interactions
 ScoresDFHotStart = pd.merge(ScoresDF, UserRatedsCutten, on = 'username')
 ScoresDFHotStart = pd.merge(ScoresDFHotStart, AnimeRatedsCutten, on = 'anime_id')
+
+# Save ScoresDFHotStart to a CSV file
+ScoresDFHotStart.to_csv('../processed_data/ScoresDFHotStart.csv', index=False)
