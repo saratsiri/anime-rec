@@ -7,15 +7,20 @@ from collections import defaultdict
 from operator import itemgetter
 import heapq
 import pandas as pd
+import os
 
 # load numpy array from npy file
 from numpy import load
 
 # load array
-similarity_matrix = load('../processed_data/similarity_matrix_full.npy')
+# Specify the file path
+file_path=f"{os.getcwd()}/processed_data/similarity_matrix_full.npy"
+# load array
+similarity_matrix = load(file_path)
 
-AnimesDF = pd.read_csv('../raw_data/anime_cleaned.csv')
-ScoresDF = pd.read_csv('../raw_data/animelists_cleaned.csv')
+
+AnimesDF = pd.read_csv(f"{os.getcwd()}/raw_data/anime_cleaned.csv")
+ScoresDF = pd.read_csv(f"{os.getcwd()}/raw_data/animelists_cleaned.csv")
 
 animeID_to_name = AnimesDF.set_index('anime_id')['title'].to_dict()
 
