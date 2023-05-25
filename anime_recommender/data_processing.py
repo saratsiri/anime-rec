@@ -1,24 +1,25 @@
-import pandas as pd
-
+import pandas as pd #required pandas == 1.4.4
+import os
+print(pd.__version__)
 # Import datasets
-UsersDF = pd.read_csv('../raw_data/users_cleaned.csv')
-AnimesDF = pd.read_csv('../raw_data/anime_cleaned.csv')
-ScoresDF = pd.read_csv('../raw_data/animelists_cleaned.csv')
-
+# print("Loading data...\n")
+# UsersDF = pd.read_csv(f"{os.getcwd()}/raw_data/users_cleaned.csv")
+# AnimesDF = pd.read_csv(f"{os.getcwd()}/raw_data/anime_cleaned.csv")
+# ScoresDF = pd.read_csv(f"{os.getcwd()}/raw_data/animelists_cleaned.csv")
+# print("Loading data completed\n")
 # Trim ScoresDF to essential columns
 ScoresDF = ScoresDF[['username', 'anime_id', 'my_score', 'my_status']]
 
 # Find and print the range of ratings
 lower_rating = ScoresDF['my_score'].min()
 upper_rating = ScoresDF['my_score'].max()
-print('Range of ratings vary between: {0} to {1}'.format(lower_rating, upper_rating))
 
 # Generate a dataframe detailing number of animes rated by each user
 user_anime_counts = ScoresDF['username'].value_counts()
 UsersAndScores = pd.DataFrame({'username': user_anime_counts.index, 'animes_rated': user_anime_counts.values})
 
 # Merge sampled user data with UsersAndScores
-UsersSampled = UsersDF.sample(frac = 1) # Full sampling
+UsersSampled = UsersDF.sample(frac = .01) # Full sampling
 UsersAndScoresSampled = pd.merge(UsersAndScores, UsersSampled, on = 'username')
 
 # Group users by the same number of animes rated
@@ -44,4 +45,5 @@ ScoresDFHotStart = pd.merge(ScoresDF, UserRatedsCutten, on = 'username')
 ScoresDFHotStart = pd.merge(ScoresDFHotStart, AnimeRatedsCutten, on = 'anime_id')
 
 # Save ScoresDFHotStart to a CSV file
-ScoresDFHotStart.to_csv('../processed_data/ScoresDFHotStart.csv', index=False)
+ScoresDFHotStart.to_csv(f"{os.getcwd()}/processed_data/ScoresDFHotStart", index = False)
+print("Data processing completed.")
